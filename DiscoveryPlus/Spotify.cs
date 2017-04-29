@@ -94,7 +94,17 @@ namespace DiscoveryPlus
             return results.First();
         }
 
-        public FullTrack GetTrack(string name)
+        public Paging<PlaylistTrack> GetTracksOfPlaylist(SimplePlaylist playlist)
+        {
+            return spotify.GetPlaylistTracks(Profile.Id, playlist.Id); // can not "find" public playlists !?
+        }
+
+        public FullTrack GetTrack(string id)
+        {
+            return spotify.GetTrack(id);
+        }
+
+        public FullTrack GetSavedTrack(string name)
         {
             IEnumerable<FullTrack> results = savedTracks.Where(r => r.Name.ToLower().Contains(name.ToLower()));
             var song = results.First();
